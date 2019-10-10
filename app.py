@@ -3,8 +3,9 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
 
-client = MongoClient()
-db = client.Starterpack
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Starterpack')
+client = MongoClient(host=f'{host}?retryWrites=false')
+db = client.get_default_database()
 
 starterpacks = db.starterpacks
 bags = db.bag
@@ -65,4 +66,4 @@ def bag_delete(bag_id):
     return redirect(url_for('show_bag'))
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
