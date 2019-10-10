@@ -1,21 +1,25 @@
-<!-- templates/base.html -->
-
 <!doctype html>
 <html>
-<head>
-    <meta charset='utf-8'>
-    <title>Playlister</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-</head>
-<body>
-    {% include 'partials/navbar.html' %}
-    <div class='container'>
-      {% block content %}{% endblock %}
-    </div>
+  <head>
+      <meta charset='utf-8'>
+      <title>Starterpacks</title>
+      
+      <!-- Latest compiled and minified CSS -->
+      <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+      <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+      <link rel='stylesheet' href='../static/style.css'>
+  </head>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <body>
+      {% include 'partials/navbar.html' %}
 
-</body>
+      <h1>Starterpacks</h1>
+
+      <div class='container'>
+        {% block content %}{% endblock %}
+      </div>
+
+      <!-- Latest compiled and minified JavaScript -->
+      <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  </body>
 </html>
