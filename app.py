@@ -9,8 +9,8 @@ db = client.Starterpack
 starterpacks = db.starterpacks
 bags = db.bag
 
-starterpacks.drop
-bags.drop
+starterpacks.drop()
+bags.drop()
 
 db.starterpacks.insert_many([
     {"name": "VSCO Girl", "description": "A VSCO girl's Starter Pack", "price": "$200.00", "image": "./static/vsco.png"},
@@ -42,7 +42,7 @@ def starterpack_create(starterpack_id):
 
     return redirect(url_for('show_bag'))
 
-@app.route('/bag/<bag_id>/delete', methods=['POST'])
+@app.route('/bags/<bag_id>/delete', methods=['POST'])
 def bag_delete(bag_id):
     bag_item  = bags.find_one({'_id': ObjectId(bag_id)})
 
