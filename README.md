@@ -1,0 +1,1 @@
+A Flask and MongoDB based project that uses the CRUD principles to create a basic online store.
