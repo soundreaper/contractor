@@ -14,10 +14,10 @@ starterpacks.drop()
 bags.drop()
 
 db.starterpacks.insert_many([
-    {"name": "VSCO Girl", "description": "A VSCO girl's Starter Pack", "price": "$200.00", "image": "./static/vsco.png"},
-    {"name": "College Student", "description": "A College Student's Starter Pack", "price": "A Lifetime of Debt", "image": "./static/college.png"},
-    {"name": "CS Student", "description": "A CS Student's Starter Pack", "price": "Your Sanity", "image": "./static/cs.png"},
-    {"name": "'Pro' Gamer", "description": "A 'Pro' Gamer's Starter Pack", "price": "The Ability to Leave Home", "image": "./static/game.png"}
+    {"name": "VSCO Girl", "description": "Overpriced Waterbottle", "price": "$200.00", "image": "./static/vsco.png"},
+    {"name": "College Student", "description": "We broke out here", "price": "A Lifetime of Debt", "image": "./static/college.png"},
+    {"name": "CS Student", "description": "I have 200+ side projects", "price": "Your Sanity", "image": "./static/cs.png"},
+    {"name": "'Pro' Gamer", "description": "What is a social life", "price": "The Ability to Leave Home", "image": "./static/game.png"}
     ])
 
 app = Flask(__name__)

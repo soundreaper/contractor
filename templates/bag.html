@@ -9,7 +9,7 @@
     {% for bag in bags %}
     <div class='col-sm-3 animated zoomIn'>
         <h2>{{ bag.name }}</h2>
-        <h4>{{ bag.description }}</h4>
+        <h3>{{ bag.description }}</h3>
         <img class="startpack-image" src={{ bag.image }}>
         <p>
             <form method='POST' action='/bags/{{ bag._id }}/delete'>
