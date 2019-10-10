@@ -13,17 +13,17 @@ starterpacks.drop
 bags.drop
 
 db.starterpacks.insert_many([
-    {"name": "VSCO Girl Starter Pack", "description": "A VSCO girl's Starter Pack", "price": 200.00, "image": "./static/"},
-    {"name": "College Student Starter Pack", "description": "A College Student's Starter Pack", "price": "A Lifetime of Debt", "image": "./static/"},
-    {"name": "CS Student Starter Pack", "description": "A CS Student's Starter Pack", "price": "Your Sanity", "image": "./static/"},
-    {"name": "'Pro' Gamer Starter Pack", "description": "A 'Pro' Gamer's Starter Pack", "price": "The Ability to Leave Home", "image": "./static/"}
+    {"name": "VSCO Girl", "description": "A VSCO girl's Starter Pack", "price": "$200.00", "image": "./static/vsco.png"},
+    {"name": "College Student", "description": "A College Student's Starter Pack", "price": "A Lifetime of Debt", "image": "./static/college.png"},
+    {"name": "CS Student", "description": "A CS Student's Starter Pack", "price": "Your Sanity", "image": "./static/cs.png"},
+    {"name": "'Pro' Gamer", "description": "A 'Pro' Gamer's Starter Pack", "price": "The Ability to Leave Home", "image": "./static/game.png"}
     ])
 
 app = Flask(__name__)
 
 @app.route('/')
 def starterpacks_index():
-    return render_template('starterpacks_index.html', playlists=starterpacks.find())
+    return render_template('starterpacks_index.html', starterpacks=starterpacks.find())
 
 @app.route('/bag')
 def show_bag():
