@@ -2,15 +2,15 @@ from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
-from random import randint
 
 client = MongoClient()
 db = client.Starterpack
 
 starterpacks = db.starterpacks
+bags = db.bag
+
 starterpacks.drop
-client_cart = db.client_cart
-client_cart.drop
+bags.drop
 
 db.starterpacks.insert_many([
     {"name": "VSCO Girl Starter Pack", "description": "A VSCO girl's Starter Pack", "price": 200.00, "image": "./static/"},
@@ -23,16 +23,38 @@ app = Flask(__name__)
 
 @app.route('/')
 def starterpacks_index():
-    """Show all Starterpacks."""
-    # This will display all the starterpacks by looping through the DB
     return render_template('starterpacks_index.html', playlists=starterpacks.find())
 
-@app.route('/client_cart')
-def show_client_cart():
-    """Show the client's cart."""
-    cart = client_cart.find()
-    # This will display all the starterpacks by looping through the DB
-    return render_template('cart.html', client_cart=cart)
+@app.route('/bag')
+def show_bag():
+    bag = bags.find()
+    return render_template('bag.html', bags=bag)
+
+@app.route('/starterpacks/<starterpack_id>/add', methods=['POST'])
+def starterpack_create(starterpack_id):
+    if bags.find_one({'_id': ObjectId(starterpack_id)}):
+        bags.update_one(
+            {'_id': ObjectId(starterpack_id)},
+            {'$inc': {'quantity': int(1)}}
+        )
+    else:
+        bags.insert_one(starterpacks.find_one({'_id': ObjectId(starterpack_id)}), {'$set': {'quantity': 1}})
+
+    return redirect(url_for('show_bag'))
+
+@app.route('/bag/<bag_id>/delete', methods=['POST'])
+def bag_delete(bag_id):
+    bag_item  = bags.find_one({'_id': ObjectId(bag_id)})
+
+    bags.update_one(
+        {'_id': ObjectId(bag_id)},
+        {'$inc': {'quantity': -int(1)}}
+    )
+
+    if bag_item['quantity'] == 1:
+        bags.remove({'_id': ObjectId(bag_id)})
+
+    return redirect(url_for('show_bag'))
 
 if __name__ == '__main__':
   app.run(debug=True)
