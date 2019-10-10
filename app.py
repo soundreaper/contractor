@@ -28,7 +28,15 @@ def starterpacks_index():
 @app.route('/bag')
 def show_bag():
     bag = bags.find()
-    return render_template('bag.html', bags=bag)
+
+    num = list(bags.find({}))
+    print(num)
+    if len(num) > 0:
+        quant = num[0]['quantity']
+    else:
+        quant = 0
+        
+    return render_template('bag.html', bags=bag, quant=quant)
 
 @app.route('/starterpacks/<starterpack_id>/add', methods=['POST'])
 def starterpack_create(starterpack_id):
@@ -38,7 +46,8 @@ def starterpack_create(starterpack_id):
             {'$inc': {'quantity': int(1)}}
         )
     else:
-        bags.insert_one(starterpacks.find_one({'_id': ObjectId(starterpack_id)}), {'$set': {'quantity': 1}})
+        bags.insert_one(starterpacks.find_one({'_id': ObjectId(starterpack_id)}))
+        bags.update(starterpacks.find_one({'_id': ObjectId(starterpack_id)}), {'$set': {'quantity': 1}})
 
     return redirect(url_for('show_bag'))
 
