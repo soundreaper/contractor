@@ -30,13 +30,12 @@ def show_bag():
     bag = bags.find()
 
     num = list(bags.find({}))
-    print(num)
     if len(num) > 0:
         quant = num[0]['quantity']
     else:
         quant = 0
         
-    return render_template('bag.html', bags=bag, quant=quant)
+    return render_template('bag.html', bags=bag, num=len(num), quant=quant)
 
 @app.route('/starterpacks/<starterpack_id>/add', methods=['POST'])
 def starterpack_create(starterpack_id):
